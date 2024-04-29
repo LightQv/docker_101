@@ -1,0 +1,27 @@
+services:
+  server:
+    container_name: Express-API
+    build: ./server
+    ports:
+      - 5050:5000
+    command: npm run dev
+    volumes: 
+      - ./server/src/:/app/src/
+  mongodb:
+    container_name: Mongo-Database
+    image: mongo
+    volumes:
+      - ./data:/data/db
+  client:
+    container_name: React-Client
+    build: ./client
+    ports:
+      - 3000:3000
+    command: npm run start
+    volumes:
+      - ./client/src:/app/src/
+      - ./client/public:/app/public/
+    environment:
+      - WDS_SOCKET_HOST=0
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true 

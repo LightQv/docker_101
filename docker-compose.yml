@@ -1,0 +1,9 @@
+services:
+  server:
+    image: express-docker
+    ports:
+      - 5050:5000
+    container_name: API
+  mongodb:
+    image: mongo
+    container_name: Database
